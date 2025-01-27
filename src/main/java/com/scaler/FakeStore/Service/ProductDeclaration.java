@@ -1,12 +1,13 @@
 package com.scaler.FakeStore.Service;
 
+import com.scaler.FakeStore.Exception.ProductException;
 import com.scaler.FakeStore.Model.Product;
 
 import java.util.List;
 
 public interface ProductDeclaration {
 
-    Product findProductById(Long id);
+    Product findProductById(Long id) throws ProductException;
 
     List<Product> findallProducts();
 

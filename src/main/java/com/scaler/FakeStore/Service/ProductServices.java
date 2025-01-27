@@ -1,6 +1,7 @@
 package com.scaler.FakeStore.Service;
 
 
+import com.scaler.FakeStore.Exception.ProductException;
 import com.scaler.FakeStore.Model.Product;
 import com.scaler.FakeStore.DTO.FakeStoreDTO;
 import org.springframework.http.HttpMethod;
@@ -35,13 +36,18 @@ public class ProductServices  implements ProductDeclaration{
 
 
     @Override
-    public Product findProductById(Long id) {
+    public Product findProductById(Long id) throws ProductException {
 
         FakeStoreDTO fakeStoreDTO =restTemplate.getForObject
                 ("https://fakestoreapi.com/products/"+id, FakeStoreDTO.class);
 
+        if(fakeStoreDTO==null){
+            throw new ProductException(id,"Product not found");
+        }
 
         Product product = ConvertFakeStroretoProduct(fakeStoreDTO);
+
+
 
         return product;
     }
@@ -91,6 +97,11 @@ public class ProductServices  implements ProductDeclaration{
             return true;
         }
         return false;
+    }
+
+    public int triggeringexception(){
+        int i = 1/0;
+        return i;
     }
 
 
