@@ -3,6 +3,7 @@ package com.scaler.FakeStore.Controller;
 
 import com.scaler.FakeStore.Exception.ProductException;
 import com.scaler.FakeStore.Model.Product;
+import com.scaler.FakeStore.Projection.getDesCriptionTitlePriceImage;
 import com.scaler.FakeStore.Service.ProductDeclaration;
 import com.scaler.FakeStore.Service.ProductServices;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -51,5 +52,23 @@ public class ProductController {
         int a=1/0;
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping
+    public ResponseEntity<Product> addProduct(@RequestBody Product product){
+        System.out.println("Reached Controller");
+        return new ResponseEntity<>(productDeclaration.addProduct(product),HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable("id") Long id){
+        return new ResponseEntity<>(productDeclaration.findProductsByCategory(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/getproductsbydescription/{id}")
+        public ResponseEntity<List<getDesCriptionTitlePriceImage>>
+    getProductsByDescription(@PathVariable("id") Long id){
+            return new ResponseEntity<>(productDeclaration.
+                    findBydescriptiontitleprice(id),HttpStatus.OK);
+        }
 
 }

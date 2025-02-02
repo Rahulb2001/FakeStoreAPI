@@ -2,6 +2,7 @@ package com.scaler.FakeStore.Service;
 
 import com.scaler.FakeStore.Exception.ProductException;
 import com.scaler.FakeStore.Model.Product;
+import com.scaler.FakeStore.Projection.getDesCriptionTitlePriceImage;
 
 import java.util.List;
 
@@ -15,4 +16,9 @@ public interface ProductDeclaration {
 
     boolean deleteProduct(Long id);
 
+    Product addProduct(Product product);
+
+    List<Product> findProductsByCategory(Long id);
+
+    List<getDesCriptionTitlePriceImage> findBydescriptiontitleprice(Long id);
 }

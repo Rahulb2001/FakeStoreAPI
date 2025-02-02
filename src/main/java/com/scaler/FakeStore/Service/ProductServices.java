@@ -4,6 +4,7 @@ package com.scaler.FakeStore.Service;
 import com.scaler.FakeStore.Exception.ProductException;
 import com.scaler.FakeStore.Model.Product;
 import com.scaler.FakeStore.DTO.FakeStoreDTO;
+import com.scaler.FakeStore.Projection.getDesCriptionTitlePriceImage;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -97,6 +98,21 @@ public class ProductServices  implements ProductDeclaration{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Product addProduct(Product product) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findProductsByCategory(Long id) {
+        return List.of();
+    }
+
+    @Override
+    public List<getDesCriptionTitlePriceImage> findBydescriptiontitleprice(Long id) {
+        return List.of();
     }
 
     public int triggeringexception(){

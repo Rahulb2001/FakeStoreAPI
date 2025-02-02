@@ -1,5 +1,7 @@
 package com.scaler.FakeStore.Model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
@@ -9,7 +11,9 @@ import java.util.Date;
 public class BaseModel {
 
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     private Date createdAt;
     private Date updatedAt;
 
