@@ -10,6 +10,10 @@ public class ProductException extends Exception{
         this.id =id;
     }
 
+    public ProductException(String message){
+        super(message);
+    }
+
     public Long getId() {
         return id;
     }

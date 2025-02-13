@@ -1,6 +1,8 @@
 package com.scaler.FakeStore.Controller;
 
 
+import com.scaler.FakeStore.Common.AuthCommon;
+import com.scaler.FakeStore.DTO.UserDTO;
 import com.scaler.FakeStore.Exception.ProductException;
 import com.scaler.FakeStore.Model.Product;
 import com.scaler.FakeStore.Projection.getDesCriptionTitlePriceImage;
@@ -19,8 +21,12 @@ public class ProductController {
 
     private final ProductDeclaration productDeclaration;
 
-    public ProductController(@Qualifier("selfProductService") ProductDeclaration productDeclaration) {
+    AuthCommon authCommon ;
+
+    public ProductController(@Qualifier("selfProductService") ProductDeclaration productDeclaration,AuthCommon authCommon) {
         this.productDeclaration = productDeclaration;
+        this.authCommon = authCommon;
+
     }
 
     @GetMapping()
@@ -30,8 +36,13 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id)  throws ProductException {
+    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id
+            ,@RequestHeader("Authorization") String token )  throws ProductException {
+        UserDTO user = authCommon.ValidateToken(token);
 
+        if(user==null){
+            throw new ProductException("Token is invalid");
+        }
         return new ResponseEntity<>(productDeclaration.findProductById(id),HttpStatus.OK);
     }
 
