@@ -7,6 +7,10 @@ import com.scaler.FakeStore.Model.Product;
 import com.scaler.FakeStore.Projection.getDesCriptionTitlePriceImage;
 import com.scaler.FakeStore.Repositories.CategoryRepository;
 import com.scaler.FakeStore.Repositories.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,12 +29,13 @@ public class SelfProductService implements ProductDeclaration{
 
     @Override
     public Product findProductById(Long id) throws ProductException {
-        return null;
+        return productRepository.findById(id).orElseThrow(()->new ProductException("Product not found"));
     }
 
     @Override
-    public List<Product> findallProducts() {
-        return List.of();
+    public Page<Product> findallProducts(int page, int size) {
+        Pageable pageable= PageRequest.of(page,size, Sort.by("price").descending());
+        return productRepository.findAll(pageable);
     }
 
     @Override
@@ -45,13 +50,6 @@ public class SelfProductService implements ProductDeclaration{
 
     @Override
     public Product addProduct(Product product) {
-
-//        Category category=product.getCategory();
-//
-//        if(product.getCategory().getId()==null){
-//            category=categoryRepository.save(category);
-//            product.setCategory(category);
-//        }
 
         Category category=product.getCategory();
         boolean byId = categoryRepository.existsById(category.getId());

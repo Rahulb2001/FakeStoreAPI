@@ -5,6 +5,7 @@ import com.scaler.FakeStore.Exception.ProductException;
 import com.scaler.FakeStore.Model.Product;
 import com.scaler.FakeStore.DTO.FakeStoreDTO;
 import com.scaler.FakeStore.Projection.getDesCriptionTitlePriceImage;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -54,6 +55,11 @@ public class ProductServices  implements ProductDeclaration{
     }
 
     @Override
+    public Page<Product> findallProducts(int page, int size) {
+        return null;
+    }
+
+
     public List<Product> findallProducts() {
 
 

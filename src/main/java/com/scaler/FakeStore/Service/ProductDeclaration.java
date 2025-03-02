@@ -3,6 +3,7 @@ package com.scaler.FakeStore.Service;
 import com.scaler.FakeStore.Exception.ProductException;
 import com.scaler.FakeStore.Model.Product;
 import com.scaler.FakeStore.Projection.getDesCriptionTitlePriceImage;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface ProductDeclaration {
 
     Product findProductById(Long id) throws ProductException;
 
-    List<Product> findallProducts();
+    public Page<Product> findallProducts(int page, int size);
 
     Product updateProduct(Product product,Long id);
 
